@@ -165,3 +165,66 @@ void ListarTarefas(Tarefa Lista[]) {
         }
     }
 }
+
+void Alterartarefa(Tarefa Lista[]) {
+    char novatarefa[20];
+    char novadescricao[100];
+    int novaprioridade;
+    char novoestado[15];
+    int num;
+    int alt;
+    int opcao;
+    ListarTarefas2(Lista);
+    printf("Digite qual tarefa deseja alterar: ");
+    scanf("%d", &alt);
+    num = alt - 1;
+    printf("1. A tarefa.\n");
+    printf("2. A descricao.\n");
+    printf("3. A prioridade.\n");
+    printf("4. O estado.\n");
+    printf("Digite o que deseja mudar: ");
+    scanf("%d", &opcao);
+    limpar();
+    if (opcao == 1) {
+        printf("Digite qual vai ser a nova tarefa: ");
+        fgets(novatarefa, sizeof(novatarefa), stdin);
+        sprintf(Lista[num].tarefa, novatarefa);
+        printf("Tarefa alterada com sucesso!\n");
+    }
+    if (opcao == 2) {
+        printf("Digite qual vai ser a nova descricao: ");
+        fgets(novadescricao, sizeof(novatarefa), stdin);
+        sprintf(Lista[num].descricao, novadescricao);
+        printf("Descricao alterada com sucesso!\n");
+    }
+    if (opcao == 3) {
+        printf("Digite qual vai ser a nova prioridade: ");
+        scanf("%d", &novaprioridade);
+        Lista[num].prioridade = novaprioridade;
+        printf("Prioridade alterada com sucesso!\n");
+    }
+    if (opcao == 4) {
+        char estado[15];
+        char est[15];
+        char est2[15];
+        char est3[15];
+        int comp;
+        int comp2;
+        int comp3;
+        size_t len;
+        sprintf(est, "Feito");
+        sprintf(est2, "Fazendo");
+        sprintf(est3, "Fazer");
+        do {
+            printf("Digite o novo estado(Feito,Fazendo ou Fazer): ");
+            fgets(estado, sizeof(estado), stdin);
+            len = strlen(estado);
+            if (estado[len - 1] == '\n') estado[--len] = 0;
+            comp = strcmp(estado, est);
+            comp2 = strcmp(estado, est2);
+            comp3 = strcmp(estado, est3);
+        } while (comp != 0 && comp2 != 0 && comp3 != 0);
+        sprintf(Lista[num].estado, estado);
+        printf("Estado alterado com sucesso!\n");
+    }
+}
