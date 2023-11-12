@@ -114,7 +114,7 @@ void CriarTarefa(Tarefa Lista[]) {
     char categoria2[15];
     char categoria3[15];
     char categoria4[15];
-    sprintf(categoria, "Casa");
+    sprintf(categoria1, "Casa");
     sprintf(categoria2, "Trabalho");
     sprintf(categoria3, "Estudo");
     sprintf(categoria4, "Lazer");
