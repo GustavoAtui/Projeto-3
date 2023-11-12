@@ -495,3 +495,22 @@ void ExportarPorPrioridadeCategoria(Tarefa Lista[]) {
     printf("Tarefas exportadas com sucesso para o arquivo %s.\n", NomeArq);
     return;
 }
+
+int criararquivo(Tarefa Lista[]) {
+    FILE *arqtarefas = fopen("arqtarefas", "wb");
+    if (arqtarefas == NULL) {
+        return 1;
+    }
+    fwrite(Lista, sizeof(Tarefa), maxtarefas, arqtarefas);
+    fclose(arqtarefas);
+    return 0;
+}
+int lerarquivo(Tarefa Lista[]) {
+    FILE *arqtarefas = fopen("arqtarefas", "rb");
+    if (arqtarefas == NULL) {
+        return 1;
+    }
+    fread(Lista, sizeof(Tarefa), maxtarefas, arqtarefas);
+    fclose(arqtarefas);
+    return 0;
+}
