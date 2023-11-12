@@ -206,13 +206,13 @@ void Alterartarefa(Tarefa Lista[]) {
     if (opcao == 1) {
         printf("Digite qual vai ser a nova tarefa: ");
         fgets(novatarefa, sizeof(novatarefa), stdin);
-        sprintf(Lista[num].tarefa, novatarefa);
+        strcpy(Lista[num].tarefa, novatarefa);
         printf("Tarefa alterada com sucesso!\n");
     }
     if (opcao == 2) {
         printf("Digite qual vai ser a nova descricao: ");
         fgets(novadescricao, sizeof(novatarefa), stdin);
-        sprintf(Lista[num].descricao, novadescricao);
+        strcpy(Lista[num].descricao, novadescricao);
         printf("Descricao alterada com sucesso!\n");
     }
     if (opcao == 3) {
@@ -244,7 +244,7 @@ void Alterartarefa(Tarefa Lista[]) {
             comp2 = strcmp(estado, est2);
             comp3 = strcmp(estado, est3);
         } while (comp != 0 && comp2 != 0 && comp3 != 0);
-        sprintf(Lista[num].estado, estado);
+        strcpy(Lista[num].estado, estado);
         printf("Estado alterado com sucesso!\n");
     }
 }
