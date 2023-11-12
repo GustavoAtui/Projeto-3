@@ -228,3 +228,134 @@ void Alterartarefa(Tarefa Lista[]) {
         printf("Estado alterado com sucesso!\n");
     }
 }
+
+void FiltrartarefaPrioridade(Tarefa Lista[]) {
+    int pri;
+    int contador = 0;
+    printf("Digite a prioridade que deseja filtrar: ");
+    scanf("%d", &pri);
+    printf("\n");
+    for (int i = 0; i < maxtarefas; i++) {
+        if (Lista[i].prioridade == pri) {
+            contador++;
+          printf("\n-----------------\n");
+          printf("Tarefa: %s", Lista[i].tarefa);
+          printf("Descricao: %s", Lista[i].descricao);
+          printf("Prioridade: %d\n", Lista[i].prioridade);
+          printf("Estado: %s\n", Lista[i].estado);
+          printf("Categoria: %s", Lista[i].categoria);
+          printf("\n-----------------\n");
+        }
+    }
+    if (contador == 0) {
+        printf("Nao tem nenhuma tarefa com essa prioridade!\n");
+    }
+    printf("\n");
+}
+
+void FiltrartarefaEstado(Tarefa Lista[]) {
+    int contador = 0;
+    char estado[15];
+    char est[15];
+    char est2[15];
+    char est3[15];
+    int comp;
+    int comp2;
+    int comp3;
+    int comp4;
+    size_t len;
+    sprintf(est, "Completo");
+    sprintf(est2, "Em andamento");
+    sprintf(est3, "Nao iniciado");
+    do {
+        printf("Digite o estado que deseja filtrar(Completo,Em andamento ou Nao iniciado): ");
+        fgets(estado, sizeof(estado), stdin);
+        len = strlen(estado);
+        if (estado[len - 1] == '\n') estado[--len] = 0;
+        comp = strcmp(estado, est);
+        comp2 = strcmp(estado, est2);
+        comp3 = strcmp(estado, est3);
+    } while (comp != 0 && comp2 != 0 && comp3 != 0);
+    printf("\n");
+    for (int i = 0; i < maxtarefas; i++) {
+        comp4 = strcmp(estado, Lista[i].estado);
+        if (comp4 == 0) {
+            contador++;
+          printf("\n-----------------\n");
+          printf("Tarefa: %s", Lista[i].tarefa);
+          printf("Descricao: %s", Lista[i].descricao);
+          printf("Prioridade: %d\n", Lista[i].prioridade);
+          printf("Estado: %s\n", Lista[i].estado);
+          printf("Categoria: %s", Lista[i].categoria);
+          printf("\n-----------------\n");
+        }
+    }
+    if (contador == 0) {
+        printf("Nao tem nenhuma tarefa com esse estado!\n");
+    }
+    printf("\n");
+}
+
+void FiltrarTarefaCategoria(Tarefa Lista[]) {
+    char categoria[15];
+    int contador = 0;
+    printf("Digite a categoria que deseja filtrar: ");
+    fgets(categoria, sizeof(categoria), stdin);
+    size_t len = strlen(categoria);
+    if (categoria[len - 1] == '\n') categoria[--len] = 0;
+
+    printf("\n--- TAREFAS FILTRADAS POR CATEGORIA E ORDENADAS POR PRIORIDADE ---\n");
+
+
+    for (int i = 0; i < maxtarefas; i++) {
+        if (Lista[i].existe == 1 && strcmp(Lista[i].categoria, categoria) == 0) {
+            contador++;
+            printf("\n-----------------\n");
+            printf("Tarefa: %s", Lista[i].tarefa);
+            printf("Descricao: %s", Lista[i].descricao);
+            printf("Prioridade: %d\n", Lista[i].prioridade);
+            printf("Estado: %s\n", Lista[i].estado);
+            printf("Categoria: %s", Lista[i].categoria);
+            printf("\n-----------------\n");
+        }
+    }
+
+    if (contador == 0) {
+        printf("Nao tem nenhuma tarefa com essa categoria!\n");
+    }
+}
+
+void FiltrarTarefasPorPrioridadeECategoria(Tarefa Lista[]) {
+    char categoria[15];
+    int prioridade;
+
+    printf("Digite a categoria que deseja filtrar: ");
+    fgets(categoria, sizeof(categoria), stdin);
+    categoria[strcspn(categoria, "\n")] = '\0';  
+
+    printf("Digite a prioridade que deseja filtrar: ");
+    scanf("%d", &prioridade);
+    while (getchar() != '\n'); 
+
+    int contador = 0;
+
+    printf("\n--- TAREFAS FILTRADAS POR PRIORIDADE E CATEGORIA ---\n");
+
+    for (int i = 0; i < maxtarefas; i++) {
+        if (Lista[i].existe == 1 && strcmp(Lista[i].categoria, categoria) == 0 &&
+            Lista[i].prioridade == prioridade) {
+            contador++;
+            printf("\n-----------------\n");
+            printf("Tarefa: %s", Lista[i].tarefa);
+            printf("Descricao: %s", Lista[i].descricao);
+            printf("Prioridade: %d\n", Lista[i].prioridade);
+            printf("Estado: %s\n", Lista[i].estado);
+            printf("Categoria: %s", Lista[i].categoria);
+            printf("\n-----------------\n");
+        }
+    }
+
+    if (contador == 0) {
+        printf("Nao tem nenhuma tarefa com essa categoria e prioridade!\n");
+    }
+}
