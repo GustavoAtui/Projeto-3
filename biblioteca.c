@@ -359,3 +359,139 @@ void FiltrarTarefasPorPrioridadeECategoria(Tarefa Lista[]) {
         printf("Nao tem nenhuma tarefa com essa categoria e prioridade!\n");
     }
 }
+
+void ExportarPorPrioridade(Tarefa Lista[]) {
+    int prioridade;
+
+    printf("Digite a prioridade para exportar as tarefas: ");
+    scanf("%d", &prioridade);
+    while (getchar() != '\n'); 
+
+  char arqpri[] = "aqrpri.txt";
+       arqpri[strcspn( arqpri, "\n")] = '\0';  
+
+    FILE *arquivo = fopen(arqpri, "w");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para escrita.\n");
+        return;
+    }
+
+    printf("\n--- TAREFAS EXPORTADAS POR PRIORIDADE ---\n");
+
+  for (int i = 0; i < maxtarefas; i++) {
+      if (Lista[i].existe == 1 && Lista[i].prioridade == prioridade) {
+          fprintf(arquivo, "-----------------\n");
+          fprintf(arquivo, "Tarefa: %s", Lista[i].tarefa);
+          fprintf(arquivo, "Descricao: %s\n", Lista[i].descricao);
+          fprintf(arquivo, "Prioridade: %d\n", Lista[i].prioridade);
+          fprintf(arquivo, "Estado: %s\n", Lista[i].estado);
+          fprintf(arquivo, "Categoria: %s\n", Lista[i].categoria);
+          fprintf(arquivo, "-----------------\n");
+      }
+  }
+
+    fclose(arquivo);
+
+    printf("Tarefas exportadas com sucesso para o arquivo %s.\n", arqpri);
+    return;
+}
+
+void ExportarPorCategoria(Tarefa Lista[]) {
+    char categoria[15];
+
+    printf("Digite a categoria para exportar as tarefas: ");
+    fgets(categoria, sizeof(categoria), stdin);
+    categoria[strcspn(categoria, "\n")] = '\0';  
+
+    char aqrcat[] = "aqrcat.txt";  
+
+    FILE *arquivo = fopen(aqrcat, "w");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para escrita.\n");
+        return;
+    }
+
+    printf("\n--- TAREFAS EXPORTADAS POR CATEGORIA  ---\n");
+
+
+    for (int i = 0; i < maxtarefas - 1; i++) {
+        for (int j = i + 1; j < maxtarefas; j++) {
+            if (Lista[j].existe == 1 && Lista[i].existe == 1 && Lista[j].prioridade > Lista[i].prioridade) {
+
+                Tarefa temp = Lista[i];
+                Lista[i] = Lista[j];
+                Lista[j] = temp;
+            }
+        }
+    }
+
+  for (int i = 0; i < maxtarefas; i++) {
+      if (Lista[i].existe == 1 && strcmp(Lista[i].categoria, categoria) == 0) {
+          fprintf(arquivo, "-----------------\n");
+          fprintf(arquivo, "Tarefa: %s", Lista[i].tarefa);
+          fprintf(arquivo, "Descricao: %s\n", Lista[i].descricao);
+          fprintf(arquivo, "Prioridade: %d\n", Lista[i].prioridade);
+          fprintf(arquivo, "Estado: %s\n", Lista[i].estado);
+          fprintf(arquivo, "Categoria: %s\n", Lista[i].categoria);
+          fprintf(arquivo, "-----------------\n");
+      }
+  }
+
+    fclose(arquivo);
+
+    printf("Tarefas exportadas com sucesso para o arquivo %s.\n", aqrcat);
+    return;
+}
+
+void ExportarPorPrioridadeCategoria(Tarefa Lista[]) {
+    char categoria[15];
+
+    printf("Digite a categoria para exportar as tarefas: ");
+    fgets(categoria, sizeof(categoria), stdin);
+    categoria[strcspn(categoria, "\n")] = '\0';  
+
+    int prioridade;
+
+    printf("Digite a prioridade para exportar as tarefas: ");
+    scanf("%d", &prioridade);
+    while (getchar() != '\n');  
+
+    char NomeArq[] = "aqrpricat.txt";  
+
+    FILE *arquivo = fopen(NomeArq, "w");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para escrita.\n");
+        return;
+    }
+
+    printf("\n--- TAREFAS EXPORTADAS POR PRIORIDADE E CATEGORIA ---\n");
+
+
+    for (int i = 0; i < maxtarefas - 1; i++) {
+        for (int j = i + 1; j < maxtarefas; j++) {
+            if (Lista[j].existe == 1 && Lista[i].existe == 1 && Lista[j].prioridade > Lista[i].prioridade) {
+
+                Tarefa temp = Lista[i];
+                Lista[i] = Lista[j];
+                Lista[j] = temp;
+            }
+        }
+    }
+
+  for (int i = 0; i < maxtarefas; i++) {
+      if (Lista[i].existe == 1 && strcmp(Lista[i].categoria, categoria) == 0 && Lista[i].prioridade == prioridade) {
+          fprintf(arquivo, "-----------------\n");
+          fprintf(arquivo, "Tarefa: %s\n", Lista[i].tarefa);
+          fprintf(arquivo, "Prioridade: %d\n", Lista[i].prioridade);
+          fprintf(arquivo, "Categoria: %s\n", Lista[i].categoria);
+          fprintf(arquivo, "Estado: %s\n", Lista[i].estado);
+          fprintf(arquivo, "Descricao: %s\n", Lista[i].descricao);
+          fprintf(arquivo, "-----------------\n");
+      }
+  }
+
+    fclose(arquivo);
+
+    printf("Tarefas exportadas com sucesso para o arquivo %s.\n", NomeArq);
+    return;
+}
