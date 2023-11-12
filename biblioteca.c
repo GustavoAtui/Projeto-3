@@ -96,12 +96,12 @@ void CriarTarefa(Tarefa Lista[]) {
     int comp;
     int comp2;
     int comp3;
-    sprintf(est, "Feito");
-    sprintf(est2, "Fazendo");
-    sprintf(est3, "Fazer");
+    sprintf(est, "Completo");
+    sprintf(est2, "Em andamento");
+    sprintf(est3, "Nao inciado");
     // Loop para que o estado da tarefa seja valido
     do {
-        printf("Digite o estado dessa tarefa(Feito,Fazendo ou Fazer): ");
+        printf("Digite o estado dessa tarefa(Completo,Em andamento ou Nao inciado): ");
         fgets(estado, sizeof(estado), stdin);
         len = strlen(estado);
         if (estado[len - 1] == '\n') estado[--len] = 0;
@@ -231,12 +231,12 @@ void Alterartarefa(Tarefa Lista[]) {
         int comp2;
         int comp3;
         size_t len;
-        sprintf(est, "Feito");
-        sprintf(est2, "Fazendo");
-        sprintf(est3, "Fazer");
+        sprintf(est, "Completo");
+        sprintf(est2, "Em andamento");
+        sprintf(est3, "Nao inciado");
         // Loop para que o estado da tarefa seja valido
         do {
-            printf("Digite o novo estado(Feito,Fazendo ou Fazer): ");
+            printf("Digite o novo estado(Completo,Em andamento ou Nao inciado): ");
             fgets(estado, sizeof(estado), stdin);
             len = strlen(estado);
             if (estado[len - 1] == '\n') estado[--len] = 0;
